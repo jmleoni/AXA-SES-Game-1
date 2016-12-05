@@ -11,7 +11,7 @@ const calculate = function(req) {
 
   const departureDate = moment(req.body.departureDate, 'YYYY-MM-DD');
   const returnDate = moment(req.body.returnDate, 'YYYY-MM-DD');
-  const nbDays = returnDate.diff(departureDate, 'days');
+  const nbDays = returnDate.diff(departureDate, 'days') + 1;
   const rate = 1.8;
   console.log(rate * nbDays * req.body.travellerAges.length);
 
