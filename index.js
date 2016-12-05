@@ -23,6 +23,7 @@ const COVER = {
 }
 
 
+
 var Countries = function () {
 var countryMap = {};
 countryMap['EE'] = 1.3;
@@ -84,11 +85,39 @@ const calculate = function(req, res) {
   const returnDate = moment(req.body.returnDate, 'YYYY-MM-DD');
 
   const nbDays = Math.max(returnDate.diff(departureDate, 'days'),7);
+  const ageRisk = req.body.travellerAges.reduce(function(init,age) {
+    if (age < 18){
+      return init+1.1;
+    }else if (age <25){
+      return init+0.9;
+    }else if (age <66){
+      return init+1;
+    }else{
+      return init+1.5;
+    }
+  },0);
 
-  if( _.max(req.body.travellerAges) < 65 && _.min(req.body.travellerAges) > 25) {
+  const validAges = req.body.travellerAges.reduce(function(init,age) {
+    if (age <0){
+      return false;
+    }else{
+      return init;
+    }
+  }, true);
+
+  const validOptions = req.body.options.reduce(function(init,option) {
+    if (OPTIONS[option.toUpperCase()]){
+      return init;
+    }else{
+      return false;
+    }
+  }, true);
+  console.log(validOptions);
+  console.log(validAges);
+  if( validOptions && validAges && Countries.map(req.body.country) !== 0) {
     res.status(200);
     return {
-      quote: Countries.map(req.body.country)*(COVER[req.body.cover.toUpperCase()] * nbDays) + req.body.options.reduce(function(init, current) {
+      quote: ageRisk*Countries.map(req.body.country)*(COVER[req.body.cover.toUpperCase()] * nbDays) + req.body.options.reduce(function(init, current) {
         return init + OPTIONS[current.toUpperCase()];
       },0)
     };
