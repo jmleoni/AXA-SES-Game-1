@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var moment = require('moment');
 var bodyParser = require('body-parser');
-
+var _ = require('lodash');
 app.set('json spaces', 2);
 app.use(bodyParser.json());
 
@@ -30,11 +30,11 @@ const calculate = function(req, res) {
 
   const nbDays = Math.max(returnDate.diff(departureDate, 'days'),7);
 
-  if(req.body.country === 'FR' && Math.max(req.body.travellerAges) < 65 && Math.min(req.body.travellerAges) > 25) {
+  if(req.body.country === 'FR' && _.max(req.body.travellerAges) < 65 && _.min(req.body.travellerAges) > 25) {
     res.status(200);
     return {
-      quote: (COVER[req.body.cover] * nbDays) + req.body.options.reduce(function(init, current) {
-        init += OPTIONS[current];
+      quote: (COVER[req.body.cover.toUpperCase()] * nbDays) + req.body.options.reduce(function(init, current) {
+        return init + OPTIONS[current.toUpperCase()];
       },0)
     };
   } else {
