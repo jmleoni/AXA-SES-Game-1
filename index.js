@@ -30,14 +30,13 @@ const calculate = function(req, res) {
 
   const nbDays = Math.max(returnDate.diff(departureDate, 'days'),7);
 
-  if(returnDate.diff(departureDate, 'days') < 0) {
-    res.status(400);
-    return {};
+  if(req.body.country === 'FR' && Math.max(req.body.travellerAges) < 65 && Math.min(req.body.travellerAges) > 25) {
+    res.status(200);
+    return {
+      quote: (COVER[req.body.cover] * nbDays) + 
+    };
   } else {
-    // Force status to 400
     res.status(400);
-    //res.status(200);
-    return { quote: RATE * nbDays * req.body.travellerAges.length };
   }
 };
 
