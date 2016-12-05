@@ -1,16 +1,17 @@
 var express = require('express');
 var app = express();
+var moment = require('momentjs');
 
 app.post('/quote', function (req, res) {
   console.log(req.body);
-  //departureDate string 2015-mm-dd
-  //returnDate string
+
   const departureDate = moment(req.body.departureDate, 'YYYY-MM-DD');
-  const departureDate = moment(req.body.departureDate, 'YYYY-MM-DD');
-  const res = departureDate.diff(returnDate, 'days');
-  console.log(res);
-  //travellerAges []
-  // res.send('Hello World!')
+  const returnDate = moment(req.body.returnDate, 'YYYY-MM-DD');
+  const nbDays = departureDate.diff(returnDate, 'days');
+  const rate = 1.8;
+
+  res.status(200);
+  res.json({ quote: rate * nbDays * req.body.travellerAges.length });
 })
 
 app.listen(3000, function () {
