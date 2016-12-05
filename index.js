@@ -25,6 +25,13 @@ app.post('/quote', function (req, res) {
   res.json(calculate(req));
 });
 
+app.post('/feedback', function (req, res) {
+  console.log(req.body);
+
+  res.status(200);
+  res.json({'status':'ok'});
+});
+
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 });
