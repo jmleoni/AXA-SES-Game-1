@@ -33,7 +33,9 @@ const calculate = function(req, res) {
   if(req.body.country === 'FR' && Math.max(req.body.travellerAges) < 65 && Math.min(req.body.travellerAges) > 25) {
     res.status(200);
     return {
-      quote: (COVER[req.body.cover] * nbDays) + 
+      quote: (COVER[req.body.cover] * nbDays) + req.body.options.reduce(function(init, current) {
+        init += OPTIONS[current];
+      },0)
     };
   } else {
     res.status(400);
