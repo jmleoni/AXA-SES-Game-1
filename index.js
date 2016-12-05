@@ -8,19 +8,29 @@ app.use(bodyParser.json());
 
 const RATE = 1.8;
 
+const OPTIONS = {
+  "SKIING" : 24,
+  "MEDICAL" : 72,
+  "SCUBA" : 36,
+  "SPORTS": 25,
+  "YOGA" : -3
+}
+
 const calculate = function(req, res) {
 
   //Parse data
   const departureDate = moment(req.body.departureDate, 'YYYY-MM-DD');
   const returnDate = moment(req.body.returnDate, 'YYYY-MM-DD');
 
-  const nbDays = returnDate.diff(departureDate, 'days');
+  const nbDays = Math.max(returnDate.diff(departureDate, 'days'),7);
 
-  if(nbDays < 0) {
+  if(returnDate.diff(departureDate, 'days') < 0) {
     res.status(400);
     return {};
   } else {
-    res.status(200);
+    // Force status to 400
+    res.status(400);
+    //res.status(200);
     return { quote: RATE * nbDays * req.body.travellerAges.length };
   }
 };
