@@ -9,7 +9,9 @@ const calculate = function(req) {
   const nbDays = departureDate.diff(returnDate, 'days');
   const rate = 1.8;
 
-  return rate * nbDays * req.body.travellerAges.length;
+  console.log(rate * nbDays * req.body.travellerAges.length);
+
+  return { quote: rate * nbDays * req.body.travellerAges.length };
 };
 
 app.post('/quote', function (req, res) {
