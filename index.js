@@ -16,6 +16,12 @@ const OPTIONS = {
   "YOGA" : -3
 }
 
+const COVER = {
+  "BASIC" : 1.8,
+  "EXTRA" : 2.4,
+  "PREMIUM" : 4.2
+}
+
 const calculate = function(req, res) {
 
   //Parse data
