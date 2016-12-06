@@ -19,7 +19,8 @@ const OPTIONS = {
 const COVER = {
   "BASIC" : 1.8,
   "EXTRA" : 2.4,
-  "PREMIUM" : 4.2
+  "PREMIUM" : 4.2,
+  "PREMIER" : 4.2
 }
 
 
@@ -71,6 +72,7 @@ countryMap['SI'] = 0.8;
 countryMap['PL'] = 1.4;
 countryMap['HU'] = 1.1;
 countryMap['TW'] = 1.6;
+countryMap['UK'] = 1.1;
 return {
     map : function (countryCode) {
             return countryMap[countryCode] || 0;
@@ -84,7 +86,10 @@ const calculate = function(req, res) {
   const departureDate = moment(req.body.departureDate, 'YYYY-MM-DD');
   const returnDate = moment(req.body.returnDate, 'YYYY-MM-DD');
 
-  const nbDays = Math.max(returnDate.diff(departureDate, 'days'),7);
+  var nbDays = Math.max(returnDate.diff(departureDate, 'days'),7);
+  if (nbDays < 10) {
+    nbDays = 7
+  }
   const ageRisk = req.body.travellerAges.reduce(function(init,age) {
     if (age < 18){
       return init+1.1;
@@ -134,8 +139,9 @@ const calculate = function(req, res) {
     }
   }, true);
 
-  console.log('option valid : ',validOptions);
-  console.log('age valid : ', validAges);
+  console.log("valid option="+validOptions);
+  console.log("valid arguments="+validAges);
+  console.log(Countries.map(req.body.country));
 
   if( validOptions && validAges && Countries.map(req.body.country) !== 0) {
     res.status(200);
