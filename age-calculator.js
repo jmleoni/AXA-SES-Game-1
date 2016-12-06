@@ -40,29 +40,30 @@ function AgeRisk() {
             }
             nofPassengers = nofPassengers + 1
         }
-        if (nofYoungAdult >= 5) {
-            console.log("larger than 5 + 10%="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
-            sum = sum * 1.1            
-        }
-        if (nofYoungAdult == 2 && nofKids == 0 & nofAdults == 2) {
-            console.log("apply young couples. adults="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
-            sum = sum * 0.9
-        }
-
-        if (nofAdults >= 2 && nofKids >= 2) {
-            console.log("apply family pack. adults="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
-            sum = sum * 0.8
-        }
-        if (nofAdults < nofKids ) {
-            console.log("apply kids > adults penalty. adults="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
-            sum = sum * 1.15
-        }
-        if (nofPassengers == 1) {
-            console.log("alone penalty. adults="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
-            sum = sum * 1.05
-        }
-
-        return sum;
+      var rebate = 0.0;
+      // if (nofYoungAdult >= 5) {
+      //     console.log("larger than 5 + 10%="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
+      //     rebate += 0.1
+      // }
+      // if (nofYoungAdult == 2 && nofKids == 0 & nofAdults == 2) {
+      //     console.log("apply young couples. adults="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
+      //     rebate -= 0.1
+      // }
+      //
+      // if (nofAdults >= 2 && nofKids >= 2) {
+      //     console.log("apply family pack. adults="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
+      //     rebate -= 0.2
+      // }
+      // if (nofAdults < nofKids ) {
+      //     console.log("apply kids > adults penalty. adults="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
+      //     rebate += 0.15
+      // }
+      // if (nofPassengers == 1) {
+      //     console.log("alone penalty. adults="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
+      //     rebate += 0.05
+      // }
+      console.log("final rebate = "+rebate);
+        return sum*(rebate+1);
     }
 
     return calcAgeRisk;
