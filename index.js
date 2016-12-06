@@ -113,8 +113,8 @@ const calculate = function(req, res) {
     }
   }, true);
 
-  console.log(validOptions);
-  console.log(validAges);
+  console.log('option valid : ',validOptions);
+  console.log('age valid : ', validAges);
 
   if( validOptions && validAges && Countries.map(req.body.country) !== 0) {
     res.status(200);
