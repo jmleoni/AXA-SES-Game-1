@@ -14,8 +14,7 @@ function NumberCalc() {
     }
 
     function calcNumber(values) {
-
-        return sum;
+        return values;
     }
 
     return calcNumber;

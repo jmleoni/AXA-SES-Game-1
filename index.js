@@ -23,10 +23,10 @@ const OPTIONS = {
 }
 
 const COVER = {
-  "BASIC" : 18,
-  "EXTRA" : 24,
-  "PREMIUM" : 42,
-  "PREMIER" : 42
+  "BASIC" : 1.8,
+  "EXTRA" : 2.4,
+  "PREMIUM" : 4.2,
+  "PREMIER" : 4.2
 }
 
 
@@ -37,7 +37,8 @@ const calculate = function(req, res) {
   const departureDate = moment(req.body.departureDate, 'YYYY-MM-DD');
   const returnDate = moment(req.body.returnDate, 'YYYY-MM-DD');
 
-  var nbDaysTemps = Math.max(returnDate.diff(departureDate, 'days'),7);
+  var nbDaysTemps = returnDate.diff(departureDate, 'days');
+  console.log("nof Days="+nbDaysTemps);
   var nbDays = RomanNumberCalculate(nbDaysTemps)
 
   const validOptions = req.body.options.reduce(function(init,option) {
@@ -58,7 +59,7 @@ const calculate = function(req, res) {
       quote: ageRisknew
       * Countries.map(req.body.country)
       * (COVER[req.body.cover.toUpperCase()]
-      * nbDays)/100 +
+      * nbDays) +
       req.body.options.reduce(function(init, current) {
         return init + OPTIONS[current.toUpperCase()];
       },0)
