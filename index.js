@@ -71,6 +71,7 @@ countryMap['SI'] = 0.8;
 countryMap['PL'] = 1.4;
 countryMap['HU'] = 1.1;
 countryMap['TW'] = 1.6;
+countryMap['UK'] = 1.1;
 return {
     map : function (countryCode) {
             return countryMap[countryCode] || 0;
@@ -115,7 +116,7 @@ const calculate = function(req, res) {
 
   console.log(validOptions);
   console.log(validAges);
-
+  console.log(Countries.map(req.body.country));
   if( validOptions && validAges && Countries.map(req.body.country) !== 0) {
     res.status(200);
     return {
