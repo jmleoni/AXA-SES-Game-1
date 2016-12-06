@@ -9,14 +9,14 @@ var RomanNumberCalculate = require('../nbr-calculator.js')();
     var romans = [
                 { days: 1, value: 1 },
                 { days: 3, value: 3*1 },
-                { days: 4, value: 4.4-1 },
-                { days: 5, value: 4.4 },
-                { days: 7, value: 4.4 + 2*1 },
+                { days: 4, value: 4.2-1 },
+                { days: 5, value: 4.2 },
+                { days: 7, value: 4.2 + 2*1 },
                 { days: 9, value: 8.4 - 1 },
-                { days: 14, value: 8.4 + 4.4 - 1 },
+                { days: 14, value: 8.4 + 4.2 - 1 },
                 { days: 39, value: 3 * 8.4 + 8.4 - 1},
-                { days: 41, value: 39 - 8.4 + 1},
-                { days: 77, value: 39 +2 * 8.4 + 4.4 + 2* 1 }
+                { days: 41, value: 42 - 8.4 + 1},
+                { days: 77, value: 42 +2 * 8.4 + 4.2 + 2* 1 }
     ];
 
     it.each(romans, "My test", function(element, next){
