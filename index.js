@@ -53,7 +53,7 @@ const calculate = function(req, res) {
   console.log("Country="+Countries.map(req.body.country));
 
   if( validOptions  && Countries.map(req.body.country) !== 0) {
-    res.status(200);
+    res.status(204);
     var ageRisknew = ageRiskCalculator(req.body.travellerAges);
     return {
       quote: ageRisknew
