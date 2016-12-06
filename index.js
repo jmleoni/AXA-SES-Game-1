@@ -105,6 +105,27 @@ const calculate = function(req, res) {
     }
   }, true);
 
+  const adults = req.body.travellerAges.reduce(function(init, age) {
+    if( age >= 18 ){
+      return init+ 1;
+    } else {
+      return init;
+    }
+  }, 0);
+
+  const child = req.body.travellerAges.reduce(function(init, age) {
+    if( age < 18 ){
+      return init+ 1;
+    } else {
+      return init;
+    }
+  }, 0);
+
+  let discount = 1;
+  if(child >= 2 && adults >=2) {
+    discount -= 0.20;
+  }
+
   const validOptions = req.body.options.reduce(function(init,option) {
     if (OPTIONS[option.toUpperCase()]){
       return init;
@@ -119,7 +140,7 @@ const calculate = function(req, res) {
   if( validOptions && validAges && Countries.map(req.body.country) !== 0) {
     res.status(200);
     return {
-      quote: ageRisk*Countries.map(req.body.country)*(COVER[req.body.cover.toUpperCase()] * nbDays) + req.body.options.reduce(function(init, current) {
+      quote: discount*ageRisk*Countries.map(req.body.country)*(COVER[req.body.cover.toUpperCase()] * nbDays) + req.body.options.reduce(function(init, current) {
         return init + OPTIONS[current.toUpperCase()];
       },0)
     };
