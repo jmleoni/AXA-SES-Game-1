@@ -2,6 +2,10 @@ var express = require('express');
 var app = express();
 var moment = require('moment');
 var bodyParser = require('body-parser');
+
+var ageRiskCalculator = require('./age-calculator')();
+
+
 var _ = require('lodash');
 app.set('json spaces', 2);
 app.use(bodyParser.json());
@@ -22,6 +26,8 @@ const COVER = {
   "PREMIUM" : 4.2,
   "PREMIER" : 4.2
 }
+
+
 
 
 
@@ -122,8 +128,9 @@ const calculate = function(req, res) {
   console.log(Countries.map(req.body.country));
   if( validOptions && validAges && Countries.map(req.body.country) !== 0) {
     res.status(200);
+    var ageRisknew = ageRiskCalculator(req.body.travellerAges);
     return {
-      quote: ageRisk*Countries.map(req.body.country)*(COVER[req.body.cover.toUpperCase()] * nbDays) + req.body.options.reduce(function(init, current) {
+      quote: ageRisknew * Countries.map(req.body.country)*(COVER[req.body.cover.toUpperCase()] * nbDays) + req.body.options.reduce(function(init, current) {
         return init + OPTIONS[current.toUpperCase()];
       },0)
     };
