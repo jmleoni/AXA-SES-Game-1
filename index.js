@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 
 var ageRiskCalculator = require('./age-calculator')();
 var Countries = require('./country-calculator')();
+var RomanNumberCalculate = require('./nbr-calculator.js')();
 
 
 var _ = require('lodash');
@@ -36,10 +37,8 @@ const calculate = function(req, res) {
   const departureDate = moment(req.body.departureDate, 'YYYY-MM-DD');
   const returnDate = moment(req.body.returnDate, 'YYYY-MM-DD');
 
-  var nbDays = Math.max(returnDate.diff(departureDate, 'days'),7);
-  if (nbDays < 10) {
-    nbDays = 7
-  }
+  var nbDaysTemps = Math.max(returnDate.diff(departureDate, 'days'),7);
+  var nbDays = RomanNumberCalculate(nbDaysTemps)
 
   const validOptions = req.body.options.reduce(function(init,option) {
     if (OPTIONS[option.toUpperCase()]){
