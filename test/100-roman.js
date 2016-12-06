@@ -18,16 +18,16 @@ var RomanNumberCalculate = require('../nbr-calculator.js')();
     ];
 
     for (var i = 0; i < romans.length; i++) {
-
         describe('POST /roman calculator', function () {
-                it('test '+i, function (done) {
-                    console.log(romans[i]);
-                    var IN = romans.indexOf(i).days;
-                    var OUT = romans.indexOf(i).value;
-                    console.log("run test "+i+" IN="+IN+", OUT="+OUT);
+                it('test ', function (done) {
+                    var obj = romans[0];
+                    var IN = obj.days;
+                    var OUT = obj.value;
+                    console.log("run test IN="+IN+", OUT="+OUT);
                     var romanPrice = RomanNumberCalculate(IN);
                     expect(romanPrice).to.be.equal(OUT)
                     done()
                 })
         })
     }    
+
