@@ -112,8 +112,10 @@ const calculate = function(req, res) {
       return false;
     }
   }, true);
+
   console.log(validOptions);
   console.log(validAges);
+
   if( validOptions && validAges && Countries.map(req.body.country) !== 0) {
     res.status(200);
     return {
@@ -127,13 +129,12 @@ const calculate = function(req, res) {
 };
 
 app.post('/quote', function (req, res) {
-  console.log(req.body);
+  console.log(JSON.stringify(req.body));
   res.json(calculate(req, res));
 });
 
 app.post('/feedback', function (req, res) {
-  console.log(req.body);
-
+  console.log(JSON.stringify(req.body));
   res.status(200);
   res.json({'status':'ok'});
 });
