@@ -116,6 +116,27 @@ const calculate = function(req, res) {
     }
   }, true);
 
+  const adults = req.body.travellerAges.reduce(function(init, age) {
+    if( age >= 18 ){
+      return init+ 1;
+    } else {
+      return init;
+    }
+  }, 0);
+
+  const child = req.body.travellerAges.reduce(function(init, age) {
+    if( age < 18 ){
+      return init+ 1;
+    } else {
+      return init;
+    }
+  }, 0);
+
+  let discount = 1;
+  if(child >= 2 && adults >=2) {
+    discount -= 0.20;
+  }
+
   const validOptions = req.body.options.reduce(function(init,option) {
     if (OPTIONS[option.toUpperCase()]){
       return init;
@@ -123,14 +144,20 @@ const calculate = function(req, res) {
       return false;
     }
   }, true);
+
   console.log("valid option="+validOptions);
   console.log("valid arguments="+validAges);
   console.log(Countries.map(req.body.country));
+
   if( validOptions && validAges && Countries.map(req.body.country) !== 0) {
     res.status(200);
     var ageRisknew = ageRiskCalculator(req.body.travellerAges);
     return {
+<<<<<<< HEAD
       quote: ageRisknew * Countries.map(req.body.country)*(COVER[req.body.cover.toUpperCase()] * nbDays) + req.body.options.reduce(function(init, current) {
+=======
+      quote: discount*ageRisk*Countries.map(req.body.country)*(COVER[req.body.cover.toUpperCase()] * nbDays) + req.body.options.reduce(function(init, current) {
+>>>>>>> d748b5f26dbeab4641a4b18413b0a92009e6bcd4
         return init + OPTIONS[current.toUpperCase()];
       },0)
     };
