@@ -96,46 +96,6 @@ const calculate = function(req, res) {
   if (nbDays < 10) {
     nbDays = 7
   }
-  const ageRisk = req.body.travellerAges.reduce(function(init,age) {
-    if (age < 18){
-      return init+1.1;
-    }else if (age <25){
-      return init+0.9;
-    }else if (age <66){
-      return init+1;
-    }else{
-      return init+1.5;
-    }
-  },0);
-
-  const validAges = req.body.travellerAges.reduce(function(init,age) {
-    if (age <0){
-      return false;
-    }else{
-      return init;
-    }
-  }, true);
-
-  const adults = req.body.travellerAges.reduce(function(init, age) {
-    if( age >= 18 ){
-      return init+ 1;
-    } else {
-      return init;
-    }
-  }, 0);
-
-  const child = req.body.travellerAges.reduce(function(init, age) {
-    if( age < 18 ){
-      return init+ 1;
-    } else {
-      return init;
-    }
-  }, 0);
-
-  let discount = 1;
-  if(child >= 2 && adults >=2) {
-    discount -= 0.20;
-  }
 
   const validOptions = req.body.options.reduce(function(init,option) {
     if (OPTIONS[option.toUpperCase()]){
