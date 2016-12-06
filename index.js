@@ -153,11 +153,7 @@ const calculate = function(req, res) {
     res.status(200);
     var ageRisknew = ageRiskCalculator(req.body.travellerAges);
     return {
-<<<<<<< HEAD
       quote: ageRisknew * Countries.map(req.body.country)*(COVER[req.body.cover.toUpperCase()] * nbDays) + req.body.options.reduce(function(init, current) {
-=======
-      quote: discount*ageRisk*Countries.map(req.body.country)*(COVER[req.body.cover.toUpperCase()] * nbDays) + req.body.options.reduce(function(init, current) {
->>>>>>> d748b5f26dbeab4641a4b18413b0a92009e6bcd4
         return init + OPTIONS[current.toUpperCase()];
       },0)
     };
