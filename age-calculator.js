@@ -40,6 +40,10 @@ function AgeRisk() {
             }
             nofPassengers = nofPassengers + 1
         }
+        if (nofYoungAdult >= 5) {
+            console.log("larger than 5 + 10%="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
+            sum = sum * 1.1            
+        }
         if (nofYoungAdult == 2 && nofKids == 0 & nofAdults == 2) {
             console.log("apply young couples. adults="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
             sum = sum * 0.9
@@ -54,6 +58,7 @@ function AgeRisk() {
             sum = sum * 1.15
         }
         if (nofPassengers == 1) {
+            console.log("alone penalty. adults="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
             sum = sum * 1.05
         }
 
