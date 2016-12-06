@@ -1,5 +1,7 @@
 var sinon = require('sinon');
 var chai = require('chai');
+require('it-each')();
+
 chai.use(require('sinon-chai'));
 var expect = chai.expect;
 var RomanNumberCalculate = require('../nbr-calculator.js')();
@@ -17,17 +19,25 @@ var RomanNumberCalculate = require('../nbr-calculator.js')();
                 { days: 77, value: 39 +2 * 8.4 + 4.4 + 2* 1 }
     ];
 
-    for (var i = 0; i < romans.length; i++) {
-
-        describe('POST /roman calculator', function () {
-                it('test '+i, function (done) {
-                    console.log(romans[i]);
-                    var IN = romans.indexOf(i).days;
-                    var OUT = romans.indexOf(i).value;
-                    console.log("run test "+i+" IN="+IN+", OUT="+OUT);
-                    var romanPrice = RomanNumberCalculate(IN);
-                    expect(romanPrice).to.be.equal(OUT)
-                    done()
-                })
-        })
-    }    
+    it.each(romans, "My test", function(element, next){
+      console.log(element);
+      
+      next()
+    // where element is the current array index value
+  });
+    //
+    // for (var i = 0; i < romans.length; i++) {
+    //   console.log(romans);
+    //   console.log('test');
+    //
+    //     describe('POST /roman calculator', function () {
+    //         it('test ', function (done) {
+    //             var IN = romans.indexOf(i).days;
+    //             var OUT = romans.indexOf(i).value;
+    //             console.log("run test "+i+" IN="+IN+", OUT="+OUT);
+    //             var romanPrice = RomanNumberCalculate(IN);
+    //             expect(romanPrice).to.be.equal(OUT)
+    //             done()
+    //         })
+    //     })
+    // }
