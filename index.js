@@ -19,7 +19,8 @@ const OPTIONS = {
 const COVER = {
   "BASIC" : 1.8,
   "EXTRA" : 2.4,
-  "PREMIUM" : 4.2
+  "PREMIUM" : 4.2,
+  "PREMIER" : 4.2
 }
 
 
