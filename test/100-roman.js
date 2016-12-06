@@ -23,7 +23,7 @@ var RomanNumberCalculate = require('../nbr-calculator.js')();
           console.log("test "+element);
             var obj = element;
             var IN = obj.days;
-            var OUT = obj.value;
+            var OUT = Math.round(obj.value * 100) / 100;
             console.log("run test IN="+IN+", OUT="+OUT);
             var romanPrice = RomanNumberCalculate(IN);
             expect(romanPrice).to.be.equal(OUT)
