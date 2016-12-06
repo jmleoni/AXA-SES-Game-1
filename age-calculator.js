@@ -15,6 +15,7 @@ function AgeRisk() {
 
     function calcAgeRisk(values) {
         var sum = 0.0
+        var nofPassengers = 0
         var nofAdults = 0
         var nofYoungAdult = 0
         var nofKids = 0
@@ -37,6 +38,7 @@ function AgeRisk() {
                 sum = sum + 1.5
                 nofAdults = nofAdults + 1
             }
+            nofPassengers = nofPassengers + 1
         }
         if (nofYoungAdult == 2 && nofKids == 0 & nofAdults == 2) {
             console.log("apply young couples. adults="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
@@ -50,6 +52,9 @@ function AgeRisk() {
         if (nofAdults < nofKids ) {
             console.log("apply kids > adults penalty. adults="+nofAdults+", kids="+nofKids+", young couple="+nofYoungAdult)
             sum = sum * 1.15
+        }
+        if (nofPassengers == 1) {
+            sum = sum * 1.05
         }
 
         return sum;
