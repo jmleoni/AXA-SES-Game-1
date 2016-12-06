@@ -22,10 +22,10 @@ const OPTIONS = {
 }
 
 const COVER = {
-  "BASIC" : 1.8,
-  "EXTRA" : 2.4,
-  "PREMIUM" : 4.2,
-  "PREMIER" : 4.2
+  "BASIC" : 18,
+  "EXTRA" : 24,
+  "PREMIUM" : 42,
+  "PREMIER" : 42
 }
 
 
@@ -56,7 +56,11 @@ const calculate = function(req, res) {
     res.status(200);
     var ageRisknew = ageRiskCalculator(req.body.travellerAges);
     return {
-      quote: ageRisknew * Countries.map(req.body.country)*(COVER[req.body.cover.toUpperCase()] * nbDays) + req.body.options.reduce(function(init, current) {
+      quote: ageRisknew
+      * Countries.map(req.body.country)
+      * (COVER[req.body.cover.toUpperCase()]
+      * nbDays)/100 +
+      req.body.options.reduce(function(init, current) {
         return init + OPTIONS[current.toUpperCase()];
       },0)
     };
