@@ -50,7 +50,6 @@ const calculate = function(req, res) {
   }, true);
 
   console.log("valid option="+validOptions);
-  console.log("valid arguments="+validAges);
   console.log("Country="+Countries.map(req.body.country));
 
   if( validOptions  && Countries.map(req.body.country) !== 0) {
