@@ -10,8 +10,7 @@ describe('POST /roman calculator', function () {
       var IN = 1;
       var OUT = 1;
       var romanPrice = RomanNumberCalculate(IN);
-      expect(countryQuote).to.be.equal(OUT)
+      expect(romanPrice).to.be.equal(OUT)
       done()
   })
 })
-
