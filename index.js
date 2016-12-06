@@ -36,10 +36,7 @@ const calculate = function(req, res) {
   const departureDate = moment(req.body.departureDate, 'YYYY-MM-DD');
   const returnDate = moment(req.body.returnDate, 'YYYY-MM-DD');
 
-  var nbDays = Math.max(returnDate.diff(departureDate, 'days'),7);
-  if (nbDays < 10) {
-    nbDays = 7
-  }
+  var nbDays = returnDate.diff(departureDate, 'days');
 
   const validOptions = req.body.options.reduce(function(init,option) {
     if (OPTIONS[option.toUpperCase()]){
