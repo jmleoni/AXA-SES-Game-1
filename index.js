@@ -106,10 +106,9 @@ const calculate = function(req, res) {
   }, true);
 
   console.log("valid option="+validOptions);
-  console.log("valid arguments="+validAges);
   console.log(Countries.map(req.body.country));
 
-  if( validOptions && validAges && Countries.map(req.body.country) !== 0) {
+  if( validOptions  && Countries.map(req.body.country) !== 0) {
     res.status(200);
     var ageRisknew = ageRiskCalculator(req.body.travellerAges);
     return {
