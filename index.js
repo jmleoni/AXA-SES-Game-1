@@ -19,7 +19,8 @@ const OPTIONS = {
 const COVER = {
   "BASIC" : 1.8,
   "EXTRA" : 2.4,
-  "PREMIUM" : 4.2
+  "PREMIUM" : 4.2,
+  "PREMIER" : 4.2
 }
 
 
@@ -71,6 +72,7 @@ countryMap['SI'] = 0.8;
 countryMap['PL'] = 1.4;
 countryMap['HU'] = 1.1;
 countryMap['TW'] = 1.6;
+countryMap['UK'] = 1.1;
 return {
     map : function (countryCode) {
             return countryMap[countryCode] || 0;
@@ -117,6 +119,7 @@ const calculate = function(req, res) {
   }, true);
   console.log("valid option="+validOptions);
   console.log("valid arguments="+validAges);
+  console.log(Countries.map(req.body.country));
   if( validOptions && validAges && Countries.map(req.body.country) !== 0) {
     res.status(200);
     return {
@@ -130,13 +133,12 @@ const calculate = function(req, res) {
 };
 
 app.post('/quote', function (req, res) {
-  console.log(req.body);
+  console.log(JSON.stringify(req.body));
   res.json(calculate(req, res));
 });
 
 app.post('/feedback', function (req, res) {
-  console.log(req.body);
-
+  console.log(JSON.stringify(req.body));
   res.status(200);
   res.json({'status':'ok'});
 });
