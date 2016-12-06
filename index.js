@@ -84,7 +84,10 @@ const calculate = function(req, res) {
   const departureDate = moment(req.body.departureDate, 'YYYY-MM-DD');
   const returnDate = moment(req.body.returnDate, 'YYYY-MM-DD');
 
-  const nbDays = Math.max(returnDate.diff(departureDate, 'days'),7);
+  var nbDays = Math.max(returnDate.diff(departureDate, 'days'),7);
+  if (nbDays < 10) {
+    nbDays = 7
+  }
   const ageRisk = req.body.travellerAges.reduce(function(init,age) {
     if (age < 18){
       return init+1.1;
@@ -112,8 +115,8 @@ const calculate = function(req, res) {
       return false;
     }
   }, true);
-  console.log(validOptions);
-  console.log(validAges);
+  console.log("valid option="+validOptions);
+  console.log("valid arguments="+validAges);
   if( validOptions && validAges && Countries.map(req.body.country) !== 0) {
     res.status(200);
     return {
