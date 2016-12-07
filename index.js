@@ -57,10 +57,7 @@ const calculate = function(req, res) {
   if( validOptions  && Countries.map(req.body.country) !== 0) {
     res.status(200);
     var ageRisknew = ageRiskCalculator(req.body.travellerAges);
-    return ageRisknew * Countries.map(req.body.country) * (COVER[req.body.cover.toUpperCase()]  * nbDays) +  req.body.options.reduce(function(init, current) {
-        return init + OPTIONS[current.toUpperCase()];
-      },0)
-    };
+    return ageRisknew * Countries.map(req.body.country) * (COVER[req.body.cover.toUpperCase()]  * nbDays) +  req.body.options.reduce(function(init, current) {  return init + OPTIONS[current.toUpperCase()];  },0);
   } else {
     res.status(400);
   }
@@ -74,10 +71,13 @@ const offer = function(req, res) {
   //   nofKids
   // };
   var peoples = nbOfPeople(req.body.travellerAges);
+
   let offers = [];
+
   if(peoples.nbKids >= 1 ){
     offers.push('childcare');
   }
+
   return offers;
 }
 
