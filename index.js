@@ -84,6 +84,11 @@ const offer = function(req, res) {
     if (req.body.cover === "PREMIUM" || req.body.cover === "PREMIER") {
       offers.push("travel-agency");
     }
+    if (req.body.cover === "EXTRA" || req.body.cover === "BASIC") {
+      if (req.body.options === "SKIING") {
+        offers.push("ski-pass");
+      }
+    }
   }
 
   return offers;
