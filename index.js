@@ -71,11 +71,19 @@ const offer = function(req, res) {
   //   nofKids
   // };
   var peoples = nbOfPeople(req.body.travellerAges);
+  var nofAdults = peoples.nofAdults;
+  var nofYoungAdult = peoples.nofYoungAdult;
+  var nofKids = peoples.nofKids;
+  var nofPassengers = peoples.nofPassengers;
+  
 
-  let offers = [];
+  var offers = [];
 
   if(peoples.nbKids >= 1 ){
     offers.push('childcare');
+    if (req.body.cover === "PREMIUM" || req.body.cover === "PREMIER") {
+      offers.push("travel-agency");
+    }
   }
 
   return offers;
