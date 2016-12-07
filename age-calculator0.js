@@ -66,11 +66,12 @@ function AgeRisk() {
         // return sum*(rebate+1);
 
             return {
-               nofPassengers,
+              nofPassengers,
               nofAdults,
               nofYoungAdult,
               nofKids
             };
     }
+    return calcAgeRisk;
 
 }
