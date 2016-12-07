@@ -4,6 +4,8 @@ var moment = require('moment');
 var bodyParser = require('body-parser');
 
 var ageRiskCalculator = require('./age-calculator')();
+var nbOfPeople = require('./age-calculator0')();
+
 var Countries = require('./country-calculator')();
 var RomanNumberCalculate = require('./nbr-calculator.js')();
 
@@ -55,12 +57,7 @@ const calculate = function(req, res) {
   if( validOptions  && Countries.map(req.body.country) !== 0) {
     res.status(200);
     var ageRisknew = ageRiskCalculator(req.body.travellerAges);
-    return {
-      quote: ageRisknew
-      * Countries.map(req.body.country)
-      * (COVER[req.body.cover.toUpperCase()]
-      * nbDays) +
-      req.body.options.reduce(function(init, current) {
+    return ageRisknew * Countries.map(req.body.country) * (COVER[req.body.cover.toUpperCase()]  * nbDays) +  req.body.options.reduce(function(init, current) {
         return init + OPTIONS[current.toUpperCase()];
       },0)
     };
@@ -69,9 +66,28 @@ const calculate = function(req, res) {
   }
 };
 
+const offer = function(req, res) {
+  //  {
+  //    nofPassengers,
+  //   nofAdults,
+  //   nofYoungAdult,
+  //   nofKids
+  // };
+  var peoples = nbOfPeople(req.body.travellerAges);
+  let offers = [];
+  if(peoples.nbKids >= 1 ){
+    offers.push('childcare');
+  }
+  return offers;
+}
+
 app.post('/quote', function (req, res) {
   console.log(JSON.stringify(req.body));
-  res.json(calculate(req, res));
+
+  res.json({
+    quote: calculate(req, res),
+    offers: offer(req, res)
+  });
 });
 
 app.post('/feedback', function (req, res) {
