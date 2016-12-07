@@ -81,8 +81,12 @@ const offer = function(req, res) {
 
   if(peoples.nbKids >= 1 ){
     offers.push('childcare');
+    offers.push('spa');
     if (req.body.cover === "PREMIUM" || req.body.cover === "PREMIER") {
       offers.push("travel-agency");
+      if (req.body.options === "SPORTS") {
+        offers.push("accident");
+      }
     }
     if (req.body.cover === "EXTRA" || req.body.cover === "BASIC") {
       if (req.body.options === "SKIING") {
